@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import React from "react";
+import TagIco from "../icons/tag.svg"
+
 
 const NavWrapper =styled.div`
   line-height: 24px;
@@ -19,6 +21,7 @@ const Nav = ()=>{
         <NavWrapper>
             <ul>
                 <li>
+                    <img src={TagIco} alt=""/>
                     <Link to="/tag">标签页</Link>
                 </li>
                 <li>
