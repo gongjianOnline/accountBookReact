@@ -15,16 +15,9 @@ function Money() {
     // @ts-ignore
     return (
         <Mylayout>
-            <TagsSection>
-            </TagsSection>
-            <NoteSection>
-            </NoteSection>
-            <CategorySection>
-                <ul>
-                    <li className="selected">支出</li>
-                    <li>收入</li>
-                </ul>
-            </CategorySection>
+            <TagsSection/>
+            <NoteSection/>
+            <CategorySection/>
             <NumberPadSection>
                 <div className="output">100</div>
                 <div className="pad clearfix">
