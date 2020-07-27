@@ -60,13 +60,22 @@ const Wrapper = styled.section`
 `
 
 const NumberPadSection:React.FC = ()=>{
-    const [output,setoutput] = useState<string>('0')
+    const [output,_setoutput] = useState<string>('0')
+    const setoutput = (output:string)=>{
+        if(output.length > 16){
+            output = output.slice(0,16)
+        }else if(output.length === 0){
+            output = "0"
+        }
+        _setoutput(output)
+    }
     const onClickButtonWrapper = (e:React.MouseEvent)=>{
         const text = (e.target as HTMLButtonElement).textContent
         console.log(text)
         if(text === null){return;}
         switch (text) {
             case '0':
+            case '1':
             case '2':
             case '3':
             case '4':
@@ -82,12 +91,21 @@ const NumberPadSection:React.FC = ()=>{
                 }
                 break;
             case '删除':
-                console.log('删除')
+                if(output.length  === 1){
+                    setoutput('0')
+                }else{
+                    setoutput(output.slice(0,-1))
+                }
                 break;
             case '清空':
-                console.log('清空')
+                setoutput('')
                 break;
             case '.':
+                if(output.indexOf('.')>=0){
+                    return
+                }else{
+                    setoutput(output+".")
+                }
                 console.log('点')
                 break;
             case 'ok':
