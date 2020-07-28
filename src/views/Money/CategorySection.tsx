@@ -24,14 +24,18 @@ const Wrapper = styled.section`
     }
   }
 `
-const CategorySection:React.FC = ()=>{
+type Props = {
+  value:'-' | '+';
+  onChange:(value:'-' | '+')=>void
+}
+const CategorySection:React.FC<Props> = (props)=>{
     const categorMap = {'-':'支出','+':'收入'}
     type keys =keyof typeof categorMap
 
 
 
     const [categorList] = useState<keys[]>(['-','+'])
-    const [catrgory,setCategory] = useState('-') // +表示收入 -表示支出
+    const category = props.value
 
 
     return (
@@ -39,9 +43,9 @@ const CategorySection:React.FC = ()=>{
             <ul>
                 {
                     categorList.map((item)=>{
-                        return <li  className={catrgory===item?'selected':''}
+                        return <li  className={category===item?'selected':''}
                                     key={item}
-                                    onClick={()=>{setCategory(item)}}>
+                                    onClick={()=>{props.onChange(item)}}>
                                 {categorMap[item]}</li>
                     })
                 }

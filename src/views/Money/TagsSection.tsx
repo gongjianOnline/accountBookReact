@@ -32,10 +32,14 @@ const Weapper = styled.section`
     margin-top: 8px;
   }
 `
+type Props = {
+    value: string[];
+    onChange: (selected:string[]) => void;
+}
 
-const TagsSection:React.FC = (props)=>{
+const TagsSection:React.FC<Props> = (props)=>{
     const [tags,setTages] = useState<string[]>(["衣","食","住","行"])
-    const [selectTages,setSelectTages] = useState<string[]>([])
+    const selectTages = props.value;
     const onAddTag = ()=>{
         const tageName =window.prompt("新标签的名称为")
         if(tageName){
@@ -46,9 +50,9 @@ const TagsSection:React.FC = (props)=>{
         const index = selectTages.indexOf(time)
         if(index >=0){
             //如果tag以被选中,就复制所有备选中tag,作为新的selectedTag
-            setSelectTages(selectTages.filter(t=>{return t !== time}))
+            props.onChange(selectTages.filter(t=>{return t !== time}))
         }else{
-            setSelectTages([...selectTages,time])
+            props.onChange([...selectTages,time])
         }
     }
     const X = (item:string)=>{
