@@ -25,6 +25,7 @@ const Button = styled.button`
   background: #767676;
   border-radius: 4px;
   color: #fff;
+  cursor:pointer;
 `
 const Center = styled.div`
   display:flex;
