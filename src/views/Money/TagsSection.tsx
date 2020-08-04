@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import {useTags} from "../../useTags";
+import {createId} from "../../lib/createld";
 
 const Weapper = styled.section`
   background: #fff; 
@@ -44,7 +45,7 @@ const TagsSection:React.FC<Props> = (props)=>{
     const onAddTag = ()=>{
         const tageName =window.prompt("新标签的名称为")
         if(tageName !== null){
-            setTages([...tags,{id:Math.random(),name:tageName}])
+            setTages([...tags,{id:createId(),name:tageName}])
         }
     }
     const ontoggleTag = (tagId:number)=>{
