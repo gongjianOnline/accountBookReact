@@ -39,7 +39,7 @@ const Space = styled.div`
 
 
 function Tags() {
-    const {tags,setTages} = useTags()
+    const {tags} = useTags()
     return (
         <Layout>
             <Taglist>
