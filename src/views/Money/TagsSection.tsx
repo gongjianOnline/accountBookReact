@@ -34,39 +34,39 @@ const Weapper = styled.section`
   }
 `
 type Props = {
-    value: string[];
-    onChange: (selected:string[]) => void;
+    value: number[];
+    onChange: (selected:number[]) => void;
 }
 
 const TagsSection:React.FC<Props> = (props)=>{
     const {tags,setTages} = useTags()
-    const selectTages = props.value;
+    const selectTageIds = props.value;
     const onAddTag = ()=>{
         const tageName =window.prompt("新标签的名称为")
-        if(tageName){
-            setTages([...tags,tageName])
+        if(tageName !== null){
+            setTages([...tags,{id:Math.random(),name:tageName}])
         }
     }
-    const ontoggleTag = (time:string)=>{
-        const index = selectTages.indexOf(time)
+    const ontoggleTag = (tagId:number)=>{
+        const index = selectTageIds.indexOf(tagId)
         if(index >=0){
             //如果tag以被选中,就复制所有备选中tag,作为新的selectedTag
-            props.onChange(selectTages.filter(t=>{return t !== time}))
+            props.onChange(selectTageIds.filter(t=>{return t !== tagId}))
         }else{
-            props.onChange([...selectTages,time])
+            props.onChange([...selectTageIds,tagId])
         }
     }
-    const X = (item:string)=>{
-        return selectTages.indexOf(item)>=0?'selected':''
+    const X = (tagId:number)=>{
+        return selectTageIds.indexOf(tagId)>=0?'selected':''
     }
     return(
         <Weapper>
             <ol>
                 {tags.map((time)=>{
-                    return <li key={time}
-                               onClick={()=>ontoggleTag(time)}
-                               className={X(time)}>
-                            {time}
+                    return <li key={time.id}
+                               onClick={()=>ontoggleTag(time.id)}
+                               className={X(time.id)}>
+                            {time.name}
                             </li>
                 })}
             </ol>
