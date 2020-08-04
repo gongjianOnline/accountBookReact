@@ -8,10 +8,11 @@ import {
     // Link,
     Redirect
 } from "react-router-dom";
-import Tag from "./views/Tags";
+import Tags from "./views/Tags";
 import Money from "./views/Money";
 import Statistics from "./views/Statistics";
 import NoMatch from "./views/NoMatch";
+import {Tag} from "./views/Tag";
 
 
 const AppWrapper =styled.div`
@@ -23,16 +24,19 @@ function App() {
         <AppWrapper>
             <Router>
                 <Switch>
-                    <Route path="/tag">
+                    <Route exact path="/tags">
+                        <Tags />
+                    </Route>
+                    <Route exact path="/tags/:tag" >
                         <Tag />
                     </Route>
-                    <Route path="/money">
+                    <Route exact path="/money">
                         <Money />
                     </Route>
-                    <Route path="/statistics">
+                    <Route exact path="/statistics">
                         <Statistics />
                     </Route>
-                    <Redirect exact from="/" to='/money' />
+                    <Redirect  exact from="/" to='/money' />
                     <Route path="*">
                         <NoMatch />
                     </Route>

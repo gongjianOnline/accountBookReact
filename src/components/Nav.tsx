@@ -36,7 +36,7 @@ const Nav = ()=>{
         <NavWrapper>
             <ul>
                 <li>
-                    <NavLink to="/tag" activeClassName="selected">
+                    <NavLink to="/tags" activeClassName="selected">
                         <Icon name="tag" />
                         标签页
                     </NavLink>
