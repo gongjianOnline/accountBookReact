@@ -49,7 +49,7 @@ function Tags() {
                 {tags.map((item)=>{
                     return <li key={item.id}>
                         {/* eslint-disable-next-line react/jsx-no-undef */}
-                        <Link to={'/tags/' + item.name}>
+                        <Link to={'/tags/' + item.id}>
                             <span className="oneLine">{item.name}</span>
                             <Icon name='right'/>
                         </Link>
