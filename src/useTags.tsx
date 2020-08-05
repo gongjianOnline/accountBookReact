@@ -20,21 +20,34 @@ const useTags = ()=>{ //封装自定义Hooks
         return result;
     }
     const updateTag = (id:number,obj:{name:string}) =>{
-        const index = findTagIndex(id)
-        //深拷贝tags得到tagsClone
-        const tagsClone = JSON.parse(JSON.stringify(tags))
-        //把tagsClone的第index删掉,换成{id:id,name:obj.name}
-        tagsClone.splice(index,1,{id:id,name:obj.name})
-        setTages(tagsClone)
+        //优化下面的写法
+        setTages(tags.map(tag=>{
+            if(tag.id === id){
+                return {id,name:obj.name}
+            }else{
+                return tag
+            }
+        }))
+
+        /****************************************************/
+        // const index = findTagIndex(id)
+        // //深拷贝tags得到tagsClone
+        // const tagsClone = JSON.parse(JSON.stringify(tags))
+        // //把tagsClone的第index删掉,换成{id:id,name:obj.name}
+        // tagsClone.splice(index,1,{id:id,name:obj.name})
+        // setTages(tagsClone)
     }
     const deleteTag = (id:number) =>{
-        //获取要删除的下标
-        const index = findTagIndex(id)
-        //深拷贝tags得到tagsClone
-        const tagsClone = JSON.parse(JSON.stringify(tags))
-        //把tagsClone的第index删掉
-        tagsClone.splice(index,1)
-        setTages(tagsClone)
+        // 优化下面的写法
+        setTages(tags.filter((tag)=>{ return tag.id !== id}))
+        /*********************************************/
+        // //获取要删除的下标
+        // const index = findTagIndex(id)
+        // //深拷贝tags得到tagsClone
+        // const tagsClone = JSON.parse(JSON.stringify(tags))
+        // //把tagsClone的第index删掉
+        // tagsClone.splice(index,1)
+        // setTages(tagsClone)
     }
     return {
         tags,
