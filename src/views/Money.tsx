@@ -29,8 +29,11 @@ function Money() {
         })
     }
     const submit = ()=>{
-        addRecord(selected);
-        setSelected(defaultFormDate)
+        if(addRecord(selected)){
+            alert("保存成功")
+            setSelected(defaultFormDate)
+        };
+
     }
 
     return (
