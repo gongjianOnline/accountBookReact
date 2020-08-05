@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from "react";
 import {useTags} from "../../useTags";
 import {createId} from "../../lib/createld";
-
 const Weapper = styled.section`
   background: #fff; 
   padding: 12px 16px;
@@ -40,14 +39,8 @@ type Props = {
 }
 
 const TagsSection:React.FC<Props> = (props)=>{
-    const {tags,setTages} = useTags()
+    const {tags,setTages,addTag} = useTags()
     const selectTageIds = props.value;
-    const onAddTag = ()=>{
-        const tageName =window.prompt("新标签的名称为")
-        if(tageName !== null){
-            setTages([...tags,{id:createId(),name:tageName}])
-        }
-    }
     const ontoggleTag = (tagId:number)=>{
         const index = selectTageIds.indexOf(tagId)
         if(index >=0){
@@ -71,7 +64,7 @@ const TagsSection:React.FC<Props> = (props)=>{
                             </li>
                 })}
             </ol>
-            <button onClick={onAddTag}>新增标签</button>
+            <button onClick={addTag}>新增标签</button>
         </Weapper>
     )
 }

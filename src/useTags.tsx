@@ -1,14 +1,27 @@
-import {useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import {createId} from "./lib/createld";
+import {useUpdate} from "./hooks/useUpdate"
 const defaultTage = [
-    {id:createId(),name:'衣'},
-    {id:createId(),name:'食'},
-    {id:createId(),name:'住'},
-    {id:createId(),name:'行'},
 ]
 const useTags = ()=>{ //封装自定义Hooks
-    const [tags,setTages] = useState<{id:number;name:string}[]>(defaultTage)
+    const [tags,setTages] = useState<{id:number;name:string}[]>([])
     const findTag = (id:number) => tags.filter(tag=>tag.id === id)[0];
+    useEffect(()=>{
+        let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
+        if(localTags.length === 0){
+            localTags = [
+                {id:createId(),name:'衣'},
+                {id:createId(),name:'食'},
+                {id:createId(),name:'住'},
+                {id:createId(),name:'行'},
+            ]
+        }
+        setTages(localTags)
+
+    },[]) //组件挂载时执行
+    useUpdate(()=>{
+        window.localStorage.setItem('tags',JSON.stringify(tags))
+    },[tags])
     const findTagIndex = (id:number) =>{
         let result = -1
         for(let i=0;i<tags.length;i++){
@@ -49,13 +62,20 @@ const useTags = ()=>{ //封装自定义Hooks
         // tagsClone.splice(index,1)
         // setTages(tagsClone)
     }
+    const addTag = ()=>{
+        const tageName =window.prompt("新标签的名称为")
+        if(tageName !== null && tageName !== ""){
+            setTages([...tags,{id:createId(),name:tageName}])
+        }
+    }
     return {
         tags,
         setTages,
         findTag,
         updateTag,
         findTagIndex,
-        deleteTag
+        deleteTag,
+        addTag
     }
 }
 export {useTags}
