@@ -1,6 +1,6 @@
 import React from 'react'
 import {useTags} from "../useTags";
-import {useParams} from "react-router-dom"
+import {useParams,useHistory} from "react-router-dom"
 import Layout from "../components/Layout";
 import Icon from "../components/icon";
 import {Button} from "../components/Button";
@@ -44,11 +44,17 @@ const Tag:React.FC = ()=>{
           </div>
         )
     }
+    const history = useHistory();
+    const onClickBack = ()=>{
+        //页面不会刷新
+        history.goBack()
+    }
+
     const tag = findTag(parseInt(idString));
         return (
             <Layout>
                 <Topbar>
-                    <Icon name="left"/>
+                    <Icon name="left" onClick={onClickBack}/>
                     <span>编辑标签</span>
                     <Icon/>
                 </Topbar>
