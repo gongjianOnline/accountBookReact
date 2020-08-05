@@ -26,7 +26,9 @@ const Item = styled.div`
 function Statistics() {
     const [category,setCategory] = useState<'-'|'+'>('-');
     const {records} = useRecords();
-    const {getName} = useTags()
+    const {getName} = useTags();
+    const selectedRecords = records.filter(r=>r.category===category)
+
     return (
         <Layout>
             <CategorWrapper>
@@ -34,7 +36,7 @@ function Statistics() {
                                  onChange={value=>setCategory(value)}/>
             </CategorWrapper>
             <div>
-                {records.map(r=>{
+                {selectedRecords.map(r=>{
                    return (
                        <Item>
                            <div className="tags">
@@ -44,8 +46,9 @@ function Statistics() {
                            <div className="amount">
                                ￥{r.amount}
                            </div>
-
-                           {/*{day(r.createdAt).format('YYYY年MM月DD日')}*/}
+                           <div>
+                               {day(r.createdAt).format('YYYY年MM月DD日')}
+                           </div>
                        </Item>
                    )
                 })}
