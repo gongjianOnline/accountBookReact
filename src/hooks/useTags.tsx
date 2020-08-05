@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react"
-import {createId} from "./lib/createld";
-import {useUpdate} from "./hooks/useUpdate"
+import {createId} from "../lib/createld";
+import {useUpdate} from "./useUpdate"
 const defaultTage = [
 ]
 const useTags = ()=>{ //封装自定义Hooks
