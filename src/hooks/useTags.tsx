@@ -68,6 +68,14 @@ const useTags = ()=>{ //封装自定义Hooks
             setTages([...tags,{id:createId(),name:tageName}])
         }
     }
+    const getName = (id:number)=>{
+        const tag = tags.filter(t=>t.id === id)[0]
+        if(tag){
+            return tag.name
+        }else{
+            return ''
+        }
+    }
     return {
         tags,
         setTages,
@@ -75,7 +83,8 @@ const useTags = ()=>{ //封装自定义Hooks
         updateTag,
         findTagIndex,
         deleteTag,
-        addTag
+        addTag,
+        getName
     }
 }
 export {useTags}
