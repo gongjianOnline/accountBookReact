@@ -21,7 +21,7 @@ const useTags = ()=>{ //封装自定义Hooks
     },[]) //组件挂载时执行
     useUpdate(()=>{
         window.localStorage.setItem('tags',JSON.stringify(tags))
-    },[tags])
+    },tags)
     const findTagIndex = (id:number) =>{
         let result = -1
         for(let i=0;i<tags.length;i++){
