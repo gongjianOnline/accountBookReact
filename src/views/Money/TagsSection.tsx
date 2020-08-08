@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import {useTags} from "../../hooks/useTags";
-import {createId} from "../../lib/createld";
 const Weapper = styled.section`
   background: #fff; 
   padding: 12px 16px;
@@ -39,7 +38,7 @@ type Props = {
 }
 
 const TagsSection:React.FC<Props> = (props)=>{
-    const {tags,setTages,addTag} = useTags()
+    const {tags,addTag} = useTags()
     const selectTageIds = props.value;
     const ontoggleTag = (tagId:number)=>{
         const index = selectTageIds.indexOf(tagId)

@@ -1,8 +1,6 @@
-import {useEffect, useRef, useState} from "react"
+import {useEffect, useState} from "react"
 import {createId} from "../lib/createld";
 import {useUpdate} from "./useUpdate"
-const defaultTage = [
-]
 const useTags = ()=>{ //封装自定义Hooks
     const [tags,setTages] = useState<{id:number;name:string}[]>([])
     const findTag = (id:number) => tags.filter(tag=>tag.id === id)[0];
