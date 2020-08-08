@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import Nav from "./Nav";
 import styled from "styled-components";
 
@@ -13,13 +13,18 @@ const Main = styled.div`
 `
 
 type Props = {
-    children:any
+  className?:string;
+  scrollTop?:number;
 }
-
-
-
-const Layout = (props:any)=>{
-    return(
+const Layout:React.FC<Props> = (props)=>{
+  const mainRef = useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(!mainRef.current){return}
+      mainRef.current.scrollTop = props.scrollTop!;
+    },1000)
+  },[props.scrollTop])
+  return(
         <Wrapper>
             <Main className={props.className}>
                 {props.children}
@@ -27,5 +32,8 @@ const Layout = (props:any)=>{
             <Nav/>
         </Wrapper>
     )
+}
+Layout.defaultProps = {
+  scrollTop:0
 }
 export  default  Layout
